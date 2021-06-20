@@ -1,0 +1,3 @@
+# Ignore the vendor js files from linting
+
+/static/vendor/*.js

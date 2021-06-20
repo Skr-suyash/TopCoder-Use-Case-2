@@ -1,0 +1,166 @@
+
+* { 
+    box-sizing:border-box; 
+}
+
+body { 
+    background: url('https://subtlepatterns.com/patterns/little_pluses.png') #cacaca; 
+    margin:30px;
+    overflow-x: hidden;
+}
+
+#create, textarea  { 
+  float:left; 
+  padding:25px 25px 40px;
+  margin:0 20px 20px 0;
+  width:250px;
+  height:250px; 
+}
+
+#create {
+  user-select:none;
+  padding:20px; 
+  border-radius:20px;
+  text-align:center; 
+  border:15px solid rgba(0,0,0,0.1); 
+  cursor:pointer;
+  color:rgba(0,0,0,0.1);
+  font:220px "Helvetica", sans-serif;
+  line-height:185px;
+}
+
+#create:hover { border-color:rgba(0,0,0,0.2); color:rgba(0,0,0,0.2); }
+
+textarea {
+  font:20px cursive; 
+  line-height:1.5;
+  border:0;
+  border-radius:3px;
+  background: linear-gradient(#F9EFAF, #F7E98D);
+  box-shadow:0 4px 6px rgba(0,0,0,0.1);
+  overflow:hidden;
+  transition:box-shadow 0.5s ease;
+  max-width:520px;
+}
+textarea:hover { box-shadow:0 5px 8px rgba(0,0,0,0.15); }
+textarea:focus { box-shadow:0 5px 12px rgba(0,0,0,0.2); outline:none; }
+
+.notes {
+    width: 50%;
+    float: left;
+  }
+.drawing {
+    width: 50%;
+    float: left;
+}
+
+#default-board {
+    height: 100vh;
+}
+
+@media (max-width: 768px) {
+    .notes {
+        width: 100%;
+    }
+    .drawing {
+        width: 100%;
+    }
+
+    #default-board {
+        width: 100%;
+    }
+}
+
+.hero {
+    text-align: center;
+    font-size: 2em;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2em;
+}
+
+.button {
+    right: 0;
+    margin-right: 4em;
+    display: inline-block;
+    padding: 0.7rem 1rem;
+    border-radius: 1rem;
+    color: #fff !important;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    font-size: 1em;
+    transition: all 0.3s;
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+}
+.button:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2d3092;
+    border-radius: 1rem;
+    z-index: -2;
+}
+.button:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #008fb3;
+    transition: all 0.3s;
+    border-radius: 1rem;
+    z-index: -1;
+}
+.button:hover {
+    color: #fff;
+}
+.button:hover:before {
+    width: 100%;
+}
+
+@media(max-width: 768px) {
+    .button {
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        width: 50%;
+        text-align: center;
+    }
+
+    .header {
+        display: block;
+    }
+}
+
+/*  Loader  */
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    display: none;
+    margin: 0 auto;
+    width: 120px;
+    top: 50%;
+    margin-top: 5em;
+    position: relative;
+    z-index: 99;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

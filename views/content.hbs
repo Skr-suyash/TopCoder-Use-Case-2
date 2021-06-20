@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{fname}}</title>
+
+
+    {{!-- BootStrap CSS --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+    {{!-- Custom Stylesheet --}}
+    <link rel="stylesheet" href="/css/content.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Set Tracking ID in config.js file -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{trackingID}}"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{trackingID}}');
+    </script>   
+
+</head>
+
+<body>
+
+    {{!-- View SDK --}}
+    <div id="adobe-dc-view"></div>
+
+    {{!-- Whiteboard Button --}}
+    <div class="whiteboard-div">
+        <a class=" whiteboard button">
+            Go To Whiteboard
+        </a>
+    </div>
+
+    <!-- Write a Comment Box -->
+    <div class="container-fluid" style="background-color: white; margin-top: 100px;">
+        <div class="top">
+            <h1 class="header">Comments</h1>
+            <a class="refresh btn btn-primary">Refresh</a>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-7 col-md-9 col-sm-12">
+                <div class="card" style="margin-bottom: 20px;">
+                    <div class="card-header">
+                        Write a comment
+                    </div>
+                    <textarea class="form-control" id="textarea" rows="5" placeholder="Write your comment here or use the annotation toolbar..."
+                        name="body"></textarea>
+                </div>
+                <a id="submit" class="btn btn-success btnpost">Post </a>
+            </div>
+        </div>
+
+        <!-- Comment List -->
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-7 col-md-9 col-sm-12">
+                    <div id="comment-list">
+                        {{#each comments}}
+                        <div class="comment shadow" data-commentid="{{_id}}">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 scale">
+                                    <div class="profile-img">
+                                        <img src="/images/user.svg" alt="user-icon" width="50px" height="50px">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-sm-9">
+                                    <div class="user">
+                                        <span class="name">{{user}}</span>
+                                        <span class="time">{{role}}</span>
+                                        {{#if pageNumber}}
+                                        <span class="pageNumber">On Page {{pageNumber}}</span>
+                                        {{/if}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="text">
+                                            {{body}}
+                                        </p>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary reply-btn">Reply</a>
+                                        {{#ifeq ../name user}}
+                                            <a class="btn btn-danger delete-btn">Delete</a>
+                                            <a class="btn btn-info edit-btn">Edit</a>
+                                        {{else}}
+                                            {{#ifeq ../role 'Teacher'}}
+                                            <a class="btn btn-danger delete-btn">Delete</a>
+                                            {{/ifeq}}
+                                        {{/ifeq}}
+
+                                    <!-- Reply Area  -->
+                                    </div>
+                                    <div class="reply">
+                                        <!-- Write a reply Textbox -->
+                                        <textarea class="shadow-sm" name="styled-textarea" id="styled"
+                                            onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')"
+                                            placeholder="Enter your reply here..."></textarea>
+                                        <div class="btn-inline">
+                                            <a class="inline-btn btn btn-primary post">POST</a>
+                                            <a class="inline-btn btn btn-danger cancel">CANCEL</a>
+                                        </div>
+                                    </div>
+                                    <!-- Replies list -->
+                                    <div class="replies-list">
+                                        {{#each replies}}
+                                        <div class="people-reply">
+                                            <div class="reply-user">
+                                                <span class="user-name">{{this.user}}</span>
+                                                <span class="reply-role">({{this.role}})</span>
+                                            </div>
+                                            <p class="reply-p">{{this.body}}</p>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        {{!-- JQuery --}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        {{!-- Sen the data to the JS file --}}
+        <script>
+            const id = {{ id }};
+            const fname = `{{{fname}}}`;
+            const subject = '{{subject}}';
+            const name = '{{name}}';
+            const role = '{{role}}';
+        </script>
+
+        {{!-- View SDK --}}
+        <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+
+        {{!-- Custom Script --}}
+        <script src="/js/comment.js"></script>
+        <script src="/js/content.js"></script>
+
+</body>
+
+</html>

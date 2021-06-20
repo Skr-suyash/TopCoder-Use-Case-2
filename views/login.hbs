@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+
+    {{!-- ICON --}}
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+    {{!-- CUSTOM CSS --}}
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+
+    <!-- Error to pop up when login fails -->
+    {{#if error}}
+    <h5 class="error">{{error}}</h5>
+    {{/if}}
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <div class="links">
+                <a class="active"> Sign In </a>
+                <a href="/users/signup" class="inactive underlineHover">Sign Up </a>
+            </div>
+            <!-- Login Form -->
+            <form id="postForm" method="POST" action="/users/login">
+                <input type="email" id="email" class="fadeIn second" name="email" placeholder="Email" required>
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password"
+                    required>
+                <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
